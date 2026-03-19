@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter, sans-serif);
+  --font-display: var(--font-outfit, sans-serif);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  letter-spacing: -0.02em; /* Gives it that tight, clean modern tech look */
+}
+
+/* Framer-style Utilities */
+html.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+@keyframes water-drop {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+    border: 1px solid rgba(255,255,255,0);
+  }
+}
+
+.nav-water-effect {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.nav-water-effect::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  padding-bottom: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nav-water-effect:hover::after {
+  animation: water-drop 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+.nav-water-effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nav-water-effect:hover::before {
+  opacity: 1;
+}
