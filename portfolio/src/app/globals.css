@@ -78,3 +78,79 @@ html.smooth-scroll {
 .nav-water-effect:hover::before {
   opacity: 1;
 }
+
+@keyframes slide-up-fade {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.delay-200 { animation-delay: 200ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-600 { animation-delay: 600ms; }
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+@keyframes text-shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-text-shine {
+  background: linear-gradient(
+    to right,
+    #a3a3a3 0%,
+    #ffffff 10%,
+    #22d3ee 20%,
+    #a855f7 30%,
+    #ffffff 40%,
+    #a3a3a3 50%,
+    #ffffff 60%,
+    #22d3ee 70%,
+    #a855f7 80%,
+    #ffffff 90%,
+    #a3a3a3 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: text-shine 6s linear infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+  color: transparent;
+  text-shadow: 2px 0 rgba(168, 85, 247, 0.8), -2px 0 rgba(34, 211, 238, 0.8);
+}

@@ -2,16 +2,71 @@
 
 import React, { useEffect, useState } from "react";
 
+const CustomCursor = () => {
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const update = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
+      if (!visible) setVisible(true);
+    };
+    window.addEventListener("mousemove", update);
+    return () => window.removeEventListener("mousemove", update);
+  }, [visible]);
+
+  if (typeof window === "undefined" || window.innerWidth < 768 || !visible) return null;
+
+  return (
+    <div className="fixed w-10 h-10 border border-cyan-500/50 rounded-full pointer-events-none z-[999] transition-transform duration-75 ease-out shadow-[0_0_20px_rgba(34,211,238,0.3)] hidden lg:flex items-center justify-center flex-col mix-blend-screen" style={{ top: pos.y - 20, left: pos.x - 20 }}>
+      <div className="w-1.5 h-1.5 bg-white rounded-full animate-ping" />
+    </div>
+  );
+};
+
+const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    
+    const startTyping = () => {
+      setStarted(true);
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayedText(text.slice(0, i));
+        i++;
+        if (i > text.length) {
+          clearInterval(interval);
+        }
+      }, 25);
+    };
+
+    timeout = setTimeout(startTyping, delay);
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
+
+  return (
+    <span>
+      {started ? displayedText : ""}
+      <span className={`inline-block w-[3px] h-[1em] ml-1 bg-cyan-400 align-text-bottom ${started ? 'animate-pulse' : 'opacity-0'} shadow-[0_0_10px_rgba(34,211,238,0.8)]`} />
+    </span>
+  );
+};
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const projects = [
+    { title: "Gunal Travels", id: "gunal-travels", type: "Freelance Client" },
     { title: "Multihub", id: "multihub", type: "AI Platform" },
     { title: "Helping Hands", id: "helping-hands", type: "Utility App" },
     { title: "Food Marshal", id: "food-marshal", type: "Web Frontend" }
@@ -21,6 +76,7 @@ export default function Home() {
 
   return (
     <main className="relative w-full bg-[#000000] min-h-screen flex flex-col font-sans text-white overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-50">
+      {mounted && <CustomCursor />}
       
       {/* Framer-style Minimalist Navbar */}
       <nav className="fixed top-0 w-full px-8 py-6 flex justify-between items-center z-50 bg-[#000000]/80 backdrop-blur-xl border-b border-white/5">
@@ -47,8 +103,30 @@ export default function Home() {
           <a href="mailto:nithishjaganath88@gmail.com?subject=Let's%20Collaborate" className="bg-white text-black px-5 py-2 rounded-full text-[14px] font-semibold hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 inline-block">
             Collaborate
           </a>
+          
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center ml-2">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white hover:text-cyan-400 p-2 transition-colors">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </nav>
+
+      {/* Mobile Navigation Overlay */}
+      <div className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-40 transition-all duration-500 flex flex-col items-center justify-center gap-8 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-white hover:text-cyan-400 transition-colors">About</a>
+        <a href="#product" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-white hover:text-cyan-400 transition-colors">Software</a>
+        <a href="#resources" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-white hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#timeline" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-white hover:text-cyan-400 transition-colors">Experience</a>
+        <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-white hover:text-cyan-400 transition-colors">Contact</a>
+      </div>
 
       {/* --- HERO SECTION (Framer Style Split Layout) --- */}
       <section className="relative w-full min-h-screen flex items-center justify-center pt-20 max-w-[1600px] mx-auto">
@@ -56,13 +134,13 @@ export default function Home() {
         {/* Left Side Content */}
         <div className="w-full lg:w-1/2 flex flex-col items-start px-8 lg:pl-24 lg:pr-12 z-20">
           
-          <h1 className="text-[3.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.05] text-white">
-            Engineer the <br />
-            <span className="text-neutral-400">impossible.</span>
+          <h1 className="text-[3.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.05] text-white animate-slide-up-fade">
+            <span className="animate-text-shine">Engineer the</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-400 to-white hover-glitch transition-all duration-300 block mt-2 animate-slide-up-fade delay-200 cursor-crosshair">impossible.</span>
           </h1>
           
-          <p className="mt-6 text-lg text-neutral-400 max-w-md font-medium leading-relaxed">
-            I'm Nithish Jaganath. I design and build highly scalable, interactive digital experiences that redefine the modern web.
+          <p className="mt-6 text-lg text-neutral-400 max-w-md font-medium leading-relaxed animate-slide-up-fade delay-400 h-[100px]">
+            <TypewriterText text="I'm Nithish Jaganath. I design and build highly scalable, interactive digital experiences that redefine the modern web." delay={1000} />
           </p>
           
           {/* Live Search Box */}
@@ -118,7 +196,7 @@ export default function Home() {
               <img 
                 src="/dragon.png" 
                 alt="Epic Dragon" 
-                className="w-full h-full object-contain mix-blend-screen opacity-50 lg:opacity-100 filter contrast-[1.1] pointer-events-none"
+                className="w-full h-full object-contain mix-blend-screen opacity-50 lg:opacity-100 filter contrast-[1.1] pointer-events-none animate-float"
                 style={{ 
                   WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)', 
                   maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%)' 
@@ -266,6 +344,26 @@ export default function Home() {
 
            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               
+              {/* Project Card 0: Freelance Travels */}
+              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-amber-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-8 group-hover:border-amber-500/20 border border-transparent transition-all duration-500">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
+                  <img src="/gunal_logo_premium.png" alt="Gunal Travels Logo" className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(245,158,11,0.2)] group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(245,158,11,0.8)] transition-all duration-700 z-0 relative" />
+                </div>
+                <div className="flex flex-col flex-grow px-2 pb-4 pt-2">
+                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-amber-400 transition-colors mb-4">Gunal Travels</h3>
+                  <p className="text-neutral-400 text-sm font-medium leading-relaxed mb-6 flex-grow">Successfully delivered my very first major freelance project for Gunal Travels, a premier travels company located in Thiruporur! Developed a complete digital solution that significantly impressed the client and modernized their workflow.</p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {["Freelance", "Client Project", "Fullstack"].map(tag => (
+                      <span key={tag} className="text-[10px] uppercase font-bold text-neutral-500 border border-white/10 rounded-full px-3 py-1 bg-white/5 z-10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               {/* Project Card 1: Multihub */}
               <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-cyan-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -336,7 +434,7 @@ export default function Home() {
            <img 
              src="/lambo-top.png" 
              alt="Realistic Top Down Lamborghini" 
-             className="w-full h-full object-contain filter contrast-[1.1] transition-opacity duration-1000 rotate-180"
+             className="w-full h-full object-contain filter contrast-[1.1] transition-opacity duration-1000 rotate-180 animate-float-slow"
              style={{ 
                WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 50%)', 
                maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 50%)' 
@@ -349,7 +447,7 @@ export default function Home() {
            <img 
              src="/camaro-top.png" 
              alt="Realistic Top Down Camaro" 
-             className="w-full h-full object-contain filter contrast-[1.1] transition-opacity duration-1000 rotate-180"
+             className="w-full h-full object-contain filter contrast-[1.1] transition-opacity duration-1000 rotate-180 animate-float-slow delay-200"
              style={{ 
                WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 50%)', 
                maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 50%)' 
@@ -364,58 +462,72 @@ export default function Home() {
              {/* Central glowing track line */}
              <div className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent md:-translate-x-1/2" />
              
-             {/* Timeline Event 1 (Amazon Nova) */}
+             {/* Timeline Event 1 (Freelance 2026) -> LEFT */}
              <div className="relative w-full flex flex-col md:flex-row justify-between md:items-center mb-16 md:mb-24 group">
                <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 md:pb-0 pb-6 pl-16 md:pl-0">
+                 <h3 className="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Gunal Travels</h3>
+                 <span className="text-amber-500 text-sm font-bold tracking-wider uppercase mt-1 block">Independent Freelancer</span>
+                 <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Successfully acquired, engineered, and delivered my very first professional freelance enterprise project. Built a highly impressive, modern digital solution for Gunal Travels in Thiruporur, establishing a flawless track record in professional client contracting!</p>
+               </div>
+               {/* Timeline Node */}
+               <div className="absolute left-[20px] md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.8)] -translate-x-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-10" />
+               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 opacity-30 md:opacity-100 hidden md:block">
+                 <span className="text-neutral-600 text-5xl md:text-6xl font-black italic tracking-tighter">2026</span>
+               </div>
+             </div>
+
+             {/* Timeline Event 2 (Amazon Nova) -> RIGHT */}
+             <div className="relative w-full flex flex-col md:flex-row-reverse justify-between md:items-center mb-16 md:mb-24 group">
+               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 md:pb-0 pb-6">
                  <h3 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Amazon Nova AI Hackathon</h3>
                  <span className="text-cyan-500 text-sm font-bold tracking-wider uppercase mt-1 block">AI Integrator</span>
                  <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Leveraged cutting-edge <strong className="text-white">Amazon Nova AI</strong> models in a high-pressure competitive environment. Handled the core integration of advanced generative frameworks to engineer dynamic, intelligent logic systems.</p>
                </div>
                {/* Timeline Node */}
                <div className="absolute left-[20px] md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-cyan-500 shadow-[0_0_15px_rgba(34,211,238,0.8)] -translate-x-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-10" />
-               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 opacity-30 md:opacity-100 hidden md:block">
+               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 pl-16 md:pl-0 opacity-30 md:opacity-100 hidden md:block">
                  <span className="text-neutral-600 text-5xl md:text-6xl font-black italic tracking-tighter">2025</span>
                </div>
              </div>
 
-             {/* Timeline Event 2 (Internship 2025) */}
-             <div className="relative w-full flex flex-col md:flex-row-reverse justify-between md:items-center mb-16 md:mb-24 group">
-               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 md:pb-0 pb-6">
+             {/* Timeline Event 3 (Internship 2025) -> LEFT */}
+             <div className="relative w-full flex flex-col md:flex-row justify-between md:items-center mb-16 md:mb-24 group">
+               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 md:pb-0 pb-6 pl-16 md:pl-0">
                  <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors">Industry Internship</h3>
                  <span className="text-purple-500 text-sm font-bold tracking-wider uppercase mt-1 block">Super Java Developer</span>
                  <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Secured a highly rigorous industry internship placement. Architected and engineered <strong className="text-white">Food Marshal</strong> during this tenure, intrinsically focusing on mastering complex backend scalability, database routing, and core Java architectures.</p>
                </div>
                {/* Timeline Node */}
                <div className="absolute left-[20px] md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.8)] -translate-x-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-10" />
-               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 pl-16 md:pl-0 opacity-30 md:opacity-100 hidden md:block">
+               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 opacity-30 md:opacity-100 hidden md:block">
                  <span className="text-neutral-600 text-5xl md:text-6xl font-black italic tracking-tighter">2025</span>
                </div>
              </div>
 
-             {/* Timeline Event 3 (Ko-Hacks) */}
-             <div className="relative w-full flex flex-col md:flex-row justify-between md:items-center mb-16 md:mb-24 group">
-               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 md:pb-0 pb-6 pl-16 md:pl-0">
+             {/* Timeline Event 4 (Ko-Hacks) -> RIGHT */}
+             <div className="relative w-full flex flex-col md:flex-row-reverse justify-between md:items-center mb-16 md:mb-24 group">
+               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 md:pb-0 pb-6">
                  <h3 className="text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors">Chennai Ko-Hacks</h3>
                  <span className="text-indigo-500 text-sm font-bold tracking-wider uppercase mt-1 block">Runner-Up Position</span>
                  <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Secured the prestigious Runner-Up victory at the Chennai Kotlin Users Group (KUG) Ko-Hacks by building <strong className="text-white">Helping Hands</strong>, an award-winning utility application praised for immediate real-world impact and highly efficient user flows.</p>
                </div>
                {/* Timeline Node */}
                <div className="absolute left-[20px] md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.8)] -translate-x-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-10" />
-               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 opacity-30 md:opacity-100 hidden md:block">
+               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 pl-16 md:pl-0 opacity-30 md:opacity-100 hidden md:block">
                  <span className="text-neutral-600 text-5xl md:text-6xl font-black italic tracking-tighter">2024</span>
                </div>
              </div>
 
-             {/* Timeline Event 4 (Hindustan University) */}
-             <div className="relative w-full flex flex-col md:flex-row-reverse justify-between md:items-center group">
-               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 md:pb-0 pb-6">
+             {/* Timeline Event 5 (Hindustan University) -> LEFT */}
+             <div className="relative w-full flex flex-col md:flex-row justify-between md:items-center group">
+               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 md:pb-0 pb-6 pl-16 md:pl-0">
                  <h3 className="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">Hindustan University</h3>
                  <span className="text-emerald-500 text-sm font-bold tracking-wider uppercase mt-1 block">B.Tech CSE General</span>
                  <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Initiated my core engineering journey by joining the B.Tech Computer Science and Engineering program. Established a concrete, rigorous foundation in data structures, algorithms, and deep software logic.</p>
                </div>
                {/* Timeline Node */}
                <div className="absolute left-[20px] md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] -translate-x-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-10" />
-               <div className="w-full md:w-[45%] text-left md:text-right pr-0 md:pr-12 pl-16 md:pl-0 opacity-30 md:opacity-100 hidden md:block">
+               <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 opacity-30 md:opacity-100 hidden md:block">
                  <span className="text-neutral-600 text-5xl md:text-6xl font-black italic tracking-tighter">2023</span>
                </div>
              </div>
