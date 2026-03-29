@@ -68,7 +68,7 @@ export default function Home() {
   const projects = [
     { title: "Gunal Travels", id: "gunal-travels", type: "Freelance Client" },
     { title: "Multihub", id: "multihub", type: "AI Platform" },
-    { title: "Helping Hands", id: "helping-hands", type: "Utility App" },
+    { title: "Civic Marshall", id: "helping-hands", type: "Utility App" },
     { title: "Food Marshal", id: "food-marshal", type: "Web Frontend" }
   ];
 
@@ -384,14 +384,15 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Project Card 2: Helping Hands */}
-              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-indigo-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2">
-                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-bl from-indigo-900/30 to-transparent mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="absolute inset-0 flex items-center justify-center text-5xl font-black text-white/5 group-hover:text-indigo-500/20 transition-colors duration-500 z-0 select-none text-center leading-tight">Helping<br/>Hands</div>
+              {/* Project Card 2: Civic Marshall */}
+              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-indigo-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-indigo-500/20 border border-transparent transition-all duration-500">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
+                  <img src="/civic_marshall.png" alt="Civic Marshall Logo" className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(99,102,241,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(99,102,241,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4">
-                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors mb-4">Helping Hands</h3>
+                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors mb-4">Civic Marshall</h3>
                   <p className="text-neutral-400 text-sm font-medium leading-relaxed mb-6 flex-grow">An award-winning utility application that secured the prestigious Runner-Up position at the Chennai Kotlin Users Group (KUG) Ko-Hacks. Built with a focus on immediate real-world impact and highly efficient user flows.</p>
                   <div className="flex flex-wrap gap-2 mt-auto">
                     {["Mobile/Web", "Award-Winning", "Prototyping"].map(tag => (
@@ -404,10 +405,11 @@ export default function Home() {
               </div>
 
               {/* Project Card 3: Food Marshal */}
-              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-emerald-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2">
-                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/30 to-transparent mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="absolute inset-0 flex items-center justify-center text-5xl font-black text-white/5 group-hover:text-emerald-500/20 transition-colors duration-500 z-0 select-none text-center leading-tight">Food<br/>Marshal</div>
+              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-emerald-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-emerald-500/20 border border-transparent transition-all duration-500">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
+                  <img src="/food_marshall.png" alt="Food Marshal Logo" className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(16,185,129,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4">
                   <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors mb-4">Food Marshal</h3>
@@ -509,7 +511,7 @@ export default function Home() {
                <div className="w-full md:w-[45%] text-left pl-16 md:pl-12 md:pb-0 pb-6">
                  <h3 className="text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors">Chennai Ko-Hacks</h3>
                  <span className="text-indigo-500 text-sm font-bold tracking-wider uppercase mt-1 block">Runner-Up Position</span>
-                 <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Secured the prestigious Runner-Up victory at the Chennai Kotlin Users Group (KUG) Ko-Hacks by building <strong className="text-white">Helping Hands</strong>, an award-winning utility application praised for immediate real-world impact and highly efficient user flows.</p>
+                 <p className="text-neutral-400 mt-4 leading-relaxed font-medium">Secured the prestigious Runner-Up victory at the Chennai Kotlin Users Group (KUG) Ko-Hacks by building <strong className="text-white">Civic Marshall</strong>, an award-winning utility application praised for immediate real-world impact and highly efficient user flows.</p>
                </div>
                {/* Timeline Node */}
                <div className="absolute left-[20px] md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.8)] -translate-x-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-10" />

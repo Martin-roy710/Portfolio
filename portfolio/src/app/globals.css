@@ -16,7 +16,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
-  letter-spacing: -0.02em; /* Gives it that tight, clean modern tech look */
+  letter-spacing: -0.02em;
+  /* Gives it that tight, clean modern tech look */
 }
 
 /* Framer-style Utilities */
@@ -28,12 +29,13 @@ html.smooth-scroll {
   0% {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0.6;
-    border: 2px solid rgba(255,255,255,0.4);
+    border: 2px solid rgba(255, 255, 255, 0.4);
   }
+
   100% {
     transform: translate(-50%, -50%) scale(3);
     opacity: 0;
-    border: 1px solid rgba(255,255,255,0);
+    border: 1px solid rgba(255, 255, 255, 0);
   }
 }
 
@@ -51,7 +53,7 @@ html.smooth-scroll {
   left: 50%;
   width: 100%;
   padding-bottom: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
@@ -80,8 +82,15 @@ html.smooth-scroll {
 }
 
 @keyframes slide-up-fade {
-  0% { transform: translateY(50px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .animate-slide-up-fade {
@@ -89,14 +98,30 @@ html.smooth-scroll {
   opacity: 0;
 }
 
-.delay-200 { animation-delay: 200ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-600 { animation-delay: 600ms; }
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-600 {
+  animation-delay: 600ms;
+}
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float {
@@ -104,9 +129,17 @@ html.smooth-scroll {
 }
 
 @keyframes float-slow {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float-slow {
@@ -114,25 +147,28 @@ html.smooth-scroll {
 }
 
 @keyframes text-shine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
 .animate-text-shine {
-  background: linear-gradient(
-    to right,
-    #a3a3a3 0%,
-    #ffffff 10%,
-    #22d3ee 20%,
-    #a855f7 30%,
-    #ffffff 40%,
-    #a3a3a3 50%,
-    #ffffff 60%,
-    #22d3ee 70%,
-    #a855f7 80%,
-    #ffffff 90%,
-    #a3a3a3 100%
-  );
+  background: linear-gradient(to right,
+      #a3a3a3 0%,
+      #ffffff 10%,
+      #22d3ee 20%,
+      #a855f7 30%,
+      #ffffff 40%,
+      #a3a3a3 50%,
+      #ffffff 60%,
+      #22d3ee 70%,
+      #a855f7 80%,
+      #ffffff 90%,
+      #a3a3a3 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
@@ -141,12 +177,29 @@ html.smooth-scroll {
 }
 
 @keyframes glitch {
-  0% { transform: translate(0) }
-  20% { transform: translate(-2px, 2px) }
-  40% { transform: translate(-2px, -2px) }
-  60% { transform: translate(2px, 2px) }
-  80% { transform: translate(2px, -2px) }
-  100% { transform: translate(0) }
+  0% {
+    transform: translate(0)
+  }
+
+  20% {
+    transform: translate(-2px, 2px)
+  }
+
+  40% {
+    transform: translate(-2px, -2px)
+  }
+
+  60% {
+    transform: translate(2px, 2px)
+  }
+
+  80% {
+    transform: translate(2px, -2px)
+  }
+
+  100% {
+    transform: translate(0)
+  }
 }
 
 .hover-glitch:hover {
