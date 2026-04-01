@@ -1,6 +1,5 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 const CustomCursor = () => {
   const [pos, setPos] = useState({ x: -100, y: -100 });
@@ -29,8 +28,6 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    
     const startTyping = () => {
       setStarted(true);
       let i = 0;
@@ -43,7 +40,7 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
       }, 25);
     };
 
-    timeout = setTimeout(startTyping, delay);
+    const timeout = setTimeout(startTyping, delay);
     return () => clearTimeout(timeout);
   }, [text, delay]);
 
@@ -62,7 +59,9 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    if (!mounted) {
+      setMounted(true);
+    }
   }, []);
 
   const projects = [
@@ -82,7 +81,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full px-8 py-6 flex justify-between items-center z-50 bg-[#000000]/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center gap-2 cursor-pointer group">
           <div className="w-8 h-8 rounded-lg overflow-hidden bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-white/30 transition-colors">
-             <img src="/logo.png" alt="NJ" className="w-[120%] h-[120%] object-cover mix-blend-screen opacity-90" />
+             <Image src="/logo.png" alt="NJ" width={40} height={40} className="w-[120%] h-[120%] object-cover mix-blend-screen opacity-90" />
           </div>
           <span className="font-semibold tracking-tight text-[15px]">Nithish Jaganath</span>
         </div>
@@ -100,7 +99,7 @@ export default function Home() {
           <a href="/resume.pdf" download className="bg-white/10 text-white border border-white/20 px-5 py-2 rounded-full text-[14px] font-semibold hover:bg-white/20 transition-all duration-300 hidden sm:block shadow-[0_0_15px_rgba(255,255,255,0.05)]">
             Resume
           </a>
-          <a href="mailto:nithishjaganath88@gmail.com?subject=Let's%20Collaborate" className="bg-white text-black px-5 py-2 rounded-full text-[14px] font-semibold hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 inline-block">
+          <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'nithishjaganath88@gmail.com'}?subject=Let&apos;s%20Collaborate`} className="bg-white text-black px-5 py-2 rounded-full text-[14px] font-semibold hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 inline-block">
             Collaborate
           </a>
           
@@ -140,7 +139,7 @@ export default function Home() {
           </h1>
           
           <p className="mt-6 text-lg text-neutral-400 max-w-md font-medium leading-relaxed animate-slide-up-fade delay-400 h-[100px]">
-            <TypewriterText text="I'm Nithish Jaganath. I design and build highly scalable, interactive digital experiences that redefine the modern web." delay={1000} />
+            <TypewriterText text="I&apos;m Nithish Jaganath. I design and build highly scalable, interactive digital experiences that redefine the modern web." delay={1000} />
           </p>
           
           {/* Live Search Box */}
@@ -233,10 +232,10 @@ export default function Home() {
              </h2>
              <div className="space-y-6 text-neutral-400 text-lg leading-relaxed font-medium">
                <p>
-                 I am Nithish Jaganath, a software engineer obsessed with pushing the boundaries of what's possible on the web. Officially recognized as a <strong className="text-white">"Super Java Developer"</strong> during my industry internship, my foundation in core engineering logic is rock solid.
+                 I am Nithish Jaganath, a software engineer obsessed with pushing the boundaries of what&apos;s possible on the web. Officially recognized as a <strong className="text-white">&quot;Super Java Developer&quot;</strong> during my industry internship, my foundation in core engineering logic is rock solid.
                </p>
                <p>
-                 Whether I'm rapid-prototyping at competitive hackathons or architecting complex backend infrastructure, I believe in bridging the gap between raw data logic and emotional, highly-interactive user experiences. My passion lies in utilizing AI integration to create smart, scalable platforms that solve real-world problems with nanotech-level precision.
+                 Whether I&apos;m rapid-prototyping at competitive hackathons or architecting complex backend infrastructure, I believe in bridging the gap between raw data logic and emotional, highly-interactive user experiences. My passion lies in utilizing AI integration to create smart, scalable platforms that solve real-world problems with nanotech-level precision.
                </p>
              </div>
            </div>
@@ -349,7 +348,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-8 group-hover:border-amber-500/20 border border-transparent transition-all duration-500">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <img src="/gunal_logo_premium.png" alt="Gunal Travels Logo" className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(245,158,11,0.2)] group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(245,158,11,0.8)] transition-all duration-700 z-0 relative" />
+                  <Image src="/gunal_logo_premium.png" alt="Gunal Travels Logo" width={400} height={300} className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(245,158,11,0.2)] group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(245,158,11,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4 pt-2">
                   <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-amber-400 transition-colors mb-4">Gunal Travels</h3>
@@ -369,7 +368,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-8 group-hover:border-cyan-500/20 border border-transparent transition-all duration-500">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <img src="/multihub.png" alt="MultiHub Template" className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(34,211,238,0.2)] group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(34,211,238,0.8)] transition-all duration-700 z-0 relative" />
+                  <Image src="/multihub.png" alt="MultiHub Template" width={400} height={300} className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(34,211,238,0.2)] group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(34,211,238,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4 pt-2">
                   <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors mb-4">Multihub</h3>
@@ -389,7 +388,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-indigo-500/20 border border-transparent transition-all duration-500">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <img src="/civic_marshall.png" alt="Civic Marshall Logo" className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(99,102,241,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(99,102,241,0.8)] transition-all duration-700 z-0 relative" />
+                  <Image src="/civic_marshall.png" alt="Civic Marshall Logo" width={400} height={300} className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(99,102,241,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(99,102,241,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4">
                   <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors mb-4">Civic Marshall</h3>
@@ -409,7 +408,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-emerald-500/20 border border-transparent transition-all duration-500">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <img src="/food_marshall.png" alt="Food Marshal Logo" className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(16,185,129,0.8)] transition-all duration-700 z-0 relative" />
+                  <Image src="/food_marshall.png" alt="Food Marshal Logo" width={400} height={300} className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(16,185,129,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4">
                   <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors mb-4">Food Marshal</h3>
@@ -546,11 +545,11 @@ export default function Home() {
         <div className="text-center z-10 max-w-4xl">
            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8">Ready to collaborate?</h2>
            <p className="text-neutral-400 text-xl font-medium mb-12">
-             Currently open for new opportunities to engineer elite digital architecture. Let's discuss your next massive project.
+             Currently open for new opportunities to engineer elite digital architecture. Let&apos;s discuss your next massive project.
            </p>
            
            <div className="flex flex-col sm:flex-row justify-center gap-4">
-             <a href="mailto:nithishjaganath88@gmail.com?subject=Project%20Inquiry" className="bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] tracking-tight">
+             <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'nithishjaganath88@gmail.com'}?subject=Project%20Inquiry`} className="bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] tracking-tight">
                Initialize Comm-link
              </a>
              <a href="https://github.com/Martin-roy710" target="_blank" rel="noreferrer" className="bg-[#111111] text-white border border-white/10 px-8 py-4 rounded-full text-[15px] font-semibold hover:border-white/30 hover:bg-white/5 transition-all duration-300 tracking-tight">
@@ -592,13 +591,8 @@ const HexagonGrid = () => {
   const hexes = [];
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      let x = col * xOffset + hexWidth / 2;
-      let y = row * yOffset + hexHeight / 2;
-      
-      // Indent odd rows to interlock the honeycombs
-      if (row % 2 === 1) {
-        x += xOffset / 2;
-      }
+      const x = col * xOffset + hexWidth / 2 + (row % 2 === 1 ? xOffset / 2 : 0);
+      const y = row * yOffset + hexHeight / 2;
       
       hexes.push(
         <polygon
