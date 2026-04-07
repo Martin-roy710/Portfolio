@@ -561,7 +561,7 @@ export default function Home() {
       </section>
 
       <footer className="w-full py-10 border-t border-white/5 flex flex-col items-center justify-center text-neutral-600 text-sm font-medium bg-[#020202]">
-         <p>© 2026 Nithish Jaganath. Engineered with Next.js & Tailwind CSS.</p>
+         <p>© 2026 Nithish Jaganath.</p>
       </footer>
 
     </main>
