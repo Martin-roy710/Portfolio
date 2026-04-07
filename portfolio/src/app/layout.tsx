@@ -21,6 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ftnithish.me"),
   title: "Nithish Jaganath | Software Engineer",
   description: "Software Engineer Portfolio",
   icons: {
