@@ -409,7 +409,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-orange-500/20 border border-transparent transition-all duration-500">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <Image src="/food_marshall.jpeg" alt="Food Marshal Logo" width={400} height={300} className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(249,115,22,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(249,115,22,0.8)] transition-all duration-700 z-0 relative" />
+                  <Image src="/food_marshall.jpeg" alt="Food Marshal Logo" width={400} height={300} className="w-[75%] h-[75%] object-contain filter drop-shadow-[0_0_10px_rgba(249,115,22,0.2)] scale-100 group-hover:scale-110 group-hover:drop-shadow-[0_0_40px_rgba(249,115,22,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4">
                   <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-orange-400 transition-colors mb-4">Food Marshal</h3>
