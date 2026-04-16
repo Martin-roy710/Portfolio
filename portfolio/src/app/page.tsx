@@ -233,7 +233,7 @@ export default function Home() {
              </h2>
              <div className="space-y-6 text-neutral-400 text-lg leading-relaxed font-medium">
                <p>
-                 I am Nithish Jaganath, a software engineer obsessed with pushing the boundaries of what&apos;s possible on the web. Officially recognized as a <strong className="text-white">&quot;Super Java Developer&quot;</strong> during my industry internship, my foundation in core engineering logic is rock solid.
+                 I am Nithish Jaganath, a <strong className="text-white">B.Tech Computer Science (CSE)</strong> student and software engineer obsessed with pushing the boundaries of what&apos;s possible on the web. Currently pursuing my degree, I have already been officially recognized as a <strong className="text-white">&quot;Super Java Developer&quot;</strong> during my industry internship, proving my foundation in core engineering logic is rock solid.
                </p>
                <p>
                  Whether I&apos;m rapid-prototyping at competitive hackathons or architecting complex backend infrastructure, I believe in bridging the gap between raw data logic and emotional, highly-interactive user experiences. My passion lies in utilizing AI integration to create smart, scalable platforms that solve real-world problems with nanotech-level precision.
@@ -258,9 +258,9 @@ export default function Home() {
                <div className="p-6 font-mono text-[13px] sm:text-[14px] leading-relaxed overflow-x-auto text-left">
                  <div className="text-purple-400">package <span className="text-white">core.engineering</span>;</div>
                  <br />
-                 <div className="text-purple-400">public class <span className="text-cyan-400">Architect</span> <span className="text-purple-400">implements</span> <span className="text-emerald-400">Innovator</span> {'{'}</div>
-                 <div className="pl-4 sm:pl-6 mt-2 text-neutral-500">// Recognized as Super Java Developer</div>
-                 <div className="pl-4 sm:pl-6 text-purple-400">private <span className="text-white">String</span> focus = <span className="text-yellow-300">"Scalability"</span>;</div>
+                 <div className="text-purple-400">public class <span className="text-cyan-400">Nithish</span> <span className="text-purple-400">extends</span> <span className="text-emerald-400">ComputerScienceStudent</span> {'{'}</div>
+                 <div className="pl-4 sm:pl-6 mt-2 text-neutral-500">// B.Tech CSE & Super Java Developer</div>
+                 <div className="pl-4 sm:pl-6 text-purple-400">private <span className="text-white">String</span> focus = <span className="text-yellow-300">"Scalability & AI"</span>;</div>
                  <br />
                  <div className="pl-4 sm:pl-6 text-purple-400">public <span className="text-white">void</span> <span className="text-blue-400">deploy</span>() {'{'}</div>
                  <div className="pl-8 sm:pl-12 text-cyan-400">AI_Models<span className="text-white">.integrate()</span>;</div>
@@ -405,14 +405,14 @@ export default function Home() {
               </div>
 
               {/* Project Card 3: Food Marshal */}
-              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-emerald-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-emerald-500/20 border border-transparent transition-all duration-500">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
-                  <Image src="/food_marshall.png" alt="Food Marshal Logo" width={400} height={300} className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(16,185,129,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(16,185,129,0.8)] transition-all duration-700 z-0 relative" />
+              <div className="group cursor-pointer flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-orange-500/30 rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="w-full aspect-[4/3] bg-[#050505] rounded-xl overflow-hidden relative mb-6 flex items-center justify-center p-2 group-hover:border-orange-500/20 border border-transparent transition-all duration-500">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.1)_0%,transparent_60%)] mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
+                  <Image src="/food_marshall.png" alt="Food Marshal Logo" width={400} height={300} className="w-[110%] h-[110%] object-contain filter drop-shadow-[0_0_10px_rgba(249,115,22,0.2)] scale-110 group-hover:scale-125 group-hover:drop-shadow-[0_0_40px_rgba(249,115,22,0.8)] transition-all duration-700 z-0 relative" />
                 </div>
                 <div className="flex flex-col flex-grow px-2 pb-4">
-                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors mb-4">Food Marshal</h3>
+                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-orange-400 transition-colors mb-4">Food Marshal</h3>
                   <p className="text-neutral-400 text-sm font-medium leading-relaxed mb-6 flex-grow">A streamlined, highly interactive front-end experience for a food delivery platform. Focused strictly on intuitive UI, clean core features, and a seamless browsing experience.</p>
                   <div className="flex flex-wrap gap-2 mt-auto">
                     {["Frontend", "UI/UX", "Web Design"].map(tag => (
